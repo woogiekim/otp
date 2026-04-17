@@ -1,6 +1,5 @@
 package org.auth.totp
 
-import de.taimos.totp.TOTP
 import org.auth.OtpChecker
 
 class TOtpChecker(
@@ -8,6 +7,7 @@ class TOtpChecker(
 ) : OtpChecker {
 
     override fun check(otp: String): Boolean {
-        return TOTP.validate(totp.hexKey, otp)
+        val currentStep = System.currentTimeMillis() / 1000 / 30
+        return (-1..1).any { delta -> totp.computeTotp(currentStep + delta) == otp }
     }
 }

@@ -31,7 +31,6 @@ publishing {
 
 dependencies {
     implementation("commons-codec:commons-codec:1.15")
-    implementation("de.taimos:totp:1.0")
     implementation("com.google.zxing:javase:3.4.1")
 
     testImplementation(kotlin("test"))
