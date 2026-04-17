@@ -1,11 +1,12 @@
 plugins {
-    java
+    `java-library`
+    `maven-publish`
     id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
     kotlin("jvm") version "1.8.0"
 }
 
 group = "org.auth"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.7"
 
 repositories {
     mavenCentral()
@@ -13,8 +14,19 @@ repositories {
 }
 
 apply {
-    plugin("java")
     plugin("org.jlleitschuh.gradle.ktlint")
+}
+
+java {
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
 }
 
 dependencies {
