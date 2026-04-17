@@ -37,5 +37,5 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
 }
 
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain(11)
 }
