@@ -1,5 +1,6 @@
 package org.auth
 
+import kotlin.math.pow
 import org.apache.commons.codec.binary.Base32
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
@@ -30,7 +31,7 @@ internal object HmacOtp {
             ((hash[offset + 2].toInt() and 0xFF) shl 8) or
             (hash[offset + 3].toInt() and 0xFF)
 
-        val otp = truncated % Math.pow(10.0, DIGITS.toDouble()).toInt()
+        val otp = truncated % 10.0.pow(DIGITS).toInt()
         return otp.toString().padStart(DIGITS, '0')
     }
 }

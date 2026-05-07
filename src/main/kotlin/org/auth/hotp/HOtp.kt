@@ -14,13 +14,7 @@ class HOtp(
     secretKeyGenerator: SecretKeyGenerator = DefaultSecretKeyGenerator()
 ) : Otp {
 
-    companion object {
-        private val base32 = Base32()
-    }
-
-    val secretKey: String = secretKeyGenerator.generate().run {
-        base32.encodeToString(this)
-    }
+    val secretKey: String = Base32().encodeToString(secretKeyGenerator.generate())
 
     override fun generateUrl(): String {
         return "otpauth://hotp/${"$issuer:$account".encode()}?secret=${secretKey.encode()}&issuer=${issuer.encode()}&counter=$counter"
